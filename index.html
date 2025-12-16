@@ -49,6 +49,14 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
+        // Convierte kebab-case a PascalCase para los nombres de íconos de Lucide
+        const kebabToPascal = (str) => {
+            return str.split('-').map(part => {
+                if (!isNaN(part)) return part;
+                return part.charAt(0).toUpperCase() + part.slice(1);
+            }).join('');
+        };
+
         // Icon components using Lucide
         const Icon = ({ name, size = 24, className = "", fill = "none" }) => {
             const iconRef = useRef(null);
@@ -56,14 +64,18 @@
             useEffect(() => {
                 if (iconRef.current && window.lucide) {
                     iconRef.current.innerHTML = '';
-                    const iconElement = window.lucide.createElement(window.lucide.icons[name]);
-                    if (iconElement) {
-                        iconElement.setAttribute('width', size);
-                        iconElement.setAttribute('height', size);
-                        if (fill !== "none") {
-                            iconElement.setAttribute('fill', fill);
+                    const pascalName = kebabToPascal(name);
+                    const iconData = window.lucide.icons[pascalName];
+                    if (iconData) {
+                        const iconElement = window.lucide.createElement(iconData);
+                        if (iconElement) {
+                            iconElement.setAttribute('width', size);
+                            iconElement.setAttribute('height', size);
+                            if (fill !== "none") {
+                                iconElement.setAttribute('fill', fill);
+                            }
+                            iconRef.current.appendChild(iconElement);
                         }
-                        iconRef.current.appendChild(iconElement);
                     }
                 }
             }, [name, size, fill]);
