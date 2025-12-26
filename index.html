@@ -516,8 +516,52 @@
                             </div>
                         </section>
 
+                        {/* --- SECCION COMO FUNCIONA --- */}
+                        <section id="proceso" className="py-24 px-6 bg-[#F9FAFB]">
+                            <div className="container mx-auto max-w-5xl">
+                                <FadeInSection className="text-center mb-16">
+                                    <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-[#1A1A1A] mb-4">
+                                        Cómo Funciona
+                                    </h2>
+                                </FadeInSection>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                                    <FadeInSection className="text-center">
+                                        <div className="w-16 h-16 bg-[#10B981] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                            <Icon name="message-circle" size={32} className="text-white" />
+                                        </div>
+                                        <h3 className="font-montserrat font-bold text-xl text-[#1A1A1A] mb-3">DIAGNÓSTICO</h3>
+                                        <p className="text-gray-600">30 minutos para entender dónde estás hoy. Sin compromiso.</p>
+                                    </FadeInSection>
+
+                                    <FadeInSection delay="100" className="text-center">
+                                        <div className="w-16 h-16 bg-[#10B981] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                            <Icon name="settings" size={32} className="text-white" />
+                                        </div>
+                                        <h3 className="font-montserrat font-bold text-xl text-[#1A1A1A] mb-3">CONSTRUCCIÓN</h3>
+                                        <p className="text-gray-600">Ordenamos tu información. Conectamos tus fuentes.</p>
+                                    </FadeInSection>
+
+                                    <FadeInSection delay="200" className="text-center">
+                                        <div className="w-16 h-16 bg-[#10B981] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                            <Icon name="package" size={32} className="text-white" />
+                                        </div>
+                                        <h3 className="font-montserrat font-bold text-xl text-[#1A1A1A] mb-3">ENTREGA</h3>
+                                        <p className="text-gray-600">Tu claridad funcionando. Capacitación incluida.</p>
+                                    </FadeInSection>
+                                </div>
+
+                                <FadeInSection delay="300" className="text-center">
+                                    <p className="text-gray-700 text-lg mb-6 font-medium">Empecemos por el diagnóstico</p>
+                                    <button onClick={() => setIsModalOpen(true)} className="bg-[#10B981] text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-emerald-400 transition-all duration-300 shadow-lg hover:shadow-[#10B981]/30">
+                                        Agendar Gratis - 30 min
+                                    </button>
+                                </FadeInSection>
+                            </div>
+                        </section>
+
                         {/* --- SECCION CONFIANZA --- */}
-                        <section className="py-20 px-6 bg-[#F9FAFB]">
+                        <section className="py-20 px-6 bg-white">
                             <div className="container mx-auto max-w-5xl">
                                 <FadeInSection className="text-center mb-12">
                                     <h3 className="font-montserrat font-bold text-2xl md:text-3xl text-[#1A1A1A] mb-4">Tus datos están seguros</h3>
