@@ -266,7 +266,7 @@
             };
 
             const NavLink = ({ to, children, mobile }) => (
-                <a href={`#${to}`} onClick={(e) => scrollToSection(e, to)} className={`font-montserrat font-medium hover:text-[#10B981] transition-colors cursor-pointer ${mobile ? 'block text-xl py-4 border-b border-gray-100 text-center w-full text-gray-800' : `text-sm ${scrolled ? 'text-gray-600' : 'text-gray-300'}`}`}>
+                <a href={`#${to}`} onClick={(e) => scrollToSection(e, to)} className={`font-montserrat font-medium hover:text-[#10B981] transition-colors cursor-pointer ${mobile ? 'block text-xl py-4 border-b border-gray-100 text-center w-full text-gray-800' : 'text-sm text-gray-600'}`}>
                     {children}
                 </a>
             );
@@ -285,7 +285,7 @@
                     <CalendlyModal />
 
                     {/* --- HEADER --- */}
-                    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2' : 'bg-[#1A1A1A]/80 backdrop-blur-sm py-4'}`}>
+                    <header className={`fixed top-0 w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-2' : 'py-4'}`}>
                         <div className="container mx-auto px-6 flex justify-between items-center relative">
                             <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="flex items-center gap-2 group z-50">
                                 <img src="https://i.ibb.co/sdb3Bpq5/M-trik-logo-iso.png" alt="MéTRIK Logo" className="h-10 md:h-12 w-auto object-contain hover:scale-105 transition-transform" />
@@ -295,12 +295,12 @@
                                 <NavLink to="problema">El Problema</NavLink>
                                 <NavLink to="entregable">La Solución</NavLink>
                                 <NavLink to="nosotros">Quién Soy</NavLink>
-                                <button onClick={() => setIsModalOpen(true)} className={`${scrolled ? 'bg-[#1A1A1A] hover:bg-[#10B981]' : 'bg-[#10B981] hover:bg-emerald-400'} text-white px-5 py-2 rounded-lg font-montserrat font-semibold transition-all duration-300 shadow-lg hover:shadow-[#10B981]/30 transform hover:-translate-y-0.5 text-sm`}>
+                                <button onClick={() => setIsModalOpen(true)} className="bg-[#10B981] hover:bg-emerald-400 text-white px-5 py-2 rounded-lg font-montserrat font-semibold transition-all duration-300 shadow-lg hover:shadow-[#10B981]/30 transform hover:-translate-y-0.5 text-sm">
                                     Agendar Diagnóstico
                                 </button>
                             </nav>
 
-                            <button className={`md:hidden z-50 p-2 focus:outline-none ${scrolled || isMenuOpen ? 'text-gray-800' : 'text-white'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                            <button className="md:hidden z-50 p-2 focus:outline-none text-gray-800" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                                 {isMenuOpen ? <Icon name="x" size={28} /> : <Icon name="menu" size={28} />}
                             </button>
                         </div>
