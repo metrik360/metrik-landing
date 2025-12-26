@@ -258,6 +258,13 @@
                                 />
                             </div>
 
+                            <label className="flex items-start gap-3 text-sm text-gray-400">
+                                <input type="checkbox" name="acepta_politica" required className="mt-1 accent-[#10B981] w-4 h-4 cursor-pointer" />
+                                <span>
+                                    Acepto la <a href="/privacidad" target="_blank" className="text-[#10B981] underline hover:no-underline">Politica de Tratamiento de Datos</a> y autorizo a MéTRIK a contactarme.
+                                </span>
+                            </label>
+
                             <button
                                 type="submit"
                                 disabled={formStatus === 'sending'}
@@ -668,6 +675,12 @@
                             </div>
 
                             <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+                                <a href="/privacidad" className="text-gray-500 hover:text-[#10B981] transition-colors flex items-center gap-2 text-sm font-medium">
+                                    <Icon name="shield" size={16} /> Politica de Privacidad
+                                </a>
+                                <a href="/confianza" className="text-gray-500 hover:text-[#10B981] transition-colors flex items-center gap-2 text-sm font-medium">
+                                    <Icon name="lock" size={16} /> Seguridad de Datos
+                                </a>
                                 <a href="https://wa.me/573159509103" className="text-gray-500 hover:text-[#10B981] transition-colors flex items-center gap-2 text-sm font-medium">
                                     <Icon name="phone" size={16} /> +57 315 950 9103
                                 </a>

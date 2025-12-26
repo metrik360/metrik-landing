@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politica de Privacidad | MéTRIK</title>
+    <meta name="description" content="Politica de Tratamiento de Datos Personales de MéTRIK. Cumplimiento Ley 1581 de 2012.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/sdb3Bpq5/M-trik-logo-iso.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/sdb3Bpq5/M-trik-logo-iso.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/sdb3Bpq5/M-trik-logo-iso.png">
+    <link rel="shortcut icon" href="https://i.ibb.co/sdb3Bpq5/M-trik-logo-iso.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const kebabToPascal = (str) => {
+            return str.split('-').map(part => {
+                if (!isNaN(part)) return part;
+                return part.charAt(0).toUpperCase() + part.slice(1);
+            }).join('');
+        };
+
+        const Icon = ({ name, size = 24, className = "" }) => {
+            const iconRef = useRef(null);
+
+            useEffect(() => {
+                if (iconRef.current && window.lucide) {
+                    iconRef.current.innerHTML = '';
+                    const pascalName = kebabToPascal(name);
+                    const iconData = window.lucide.icons[pascalName];
+                    if (iconData) {
+                        const iconElement = window.lucide.createElement(iconData);
+                        if (iconElement) {
+                            iconElement.setAttribute('width', size);
+                            iconElement.setAttribute('height', size);
+                            iconRef.current.appendChild(iconElement);
+                        }
+                    }
+                }
+            }, [name, size]);
+
+            return <span ref={iconRef} className={`inline-flex items-center justify-center ${className}`}></span>;
+        };
+
+        const App = () => {
+            const [scrolled, setScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 20);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const Section = ({ title, children, id }) => (
+                <section id={id} className="mb-12">
+                    <h2 className="font-montserrat font-bold text-2xl text-[#1A1A1A] mb-6 pb-2 border-b-2 border-[#10B981]">
+                        {title}
+                    </h2>
+                    {children}
+                </section>
+            );
+
+            const Table = ({ headers, rows }) => (
+                <div className="overflow-x-auto mb-6">
+                    <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm">
+                        <thead>
+                            <tr className="bg-[#1A1A1A] text-white">
+                                {headers.map((header, i) => (
+                                    <th key={i} className="px-4 py-3 text-left font-montserrat font-semibold text-sm">
+                                        {header}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows.map((row, i) => (
+                                <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                                    {row.map((cell, j) => (
+                                        <td key={j} className="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">
+                                            {cell}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            );
+
+            return (
+                <div className="font-sans text-[#1A1A1A] antialiased">
+                    {/* Header */}
+                    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2' : 'bg-white py-4'}`}>
+                        <div className="container mx-auto px-6 flex justify-between items-center">
+                            <a href="/" className="flex items-center gap-2">
+                                <img
+                                    src="https://i.ibb.co/sdb3Bpq5/M-trik-logo-iso.png"
+                                    alt="MéTRIK Logo"
+                                    className="h-10 md:h-12 w-auto object-contain"
+                                />
+                            </a>
+                            <a
+                                href="/"
+                                className="flex items-center gap-2 text-gray-600 hover:text-[#10B981] transition-colors font-montserrat font-medium text-sm"
+                            >
+                                <Icon name="arrow-left" size={18} />
+                                Volver al inicio
+                            </a>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="pt-24 pb-16">
+                        <div className="container mx-auto px-6 max-w-4xl">
+                            {/* Hero */}
+                            <div className="text-center mb-16">
+                                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#10B981]/10 rounded-full mb-6">
+                                    <Icon name="shield-check" size={32} className="text-[#10B981]" />
+                                </div>
+                                <h1 className="font-montserrat font-bold text-3xl md:text-4xl text-[#1A1A1A] mb-4">
+                                    Politica de Tratamiento de Datos Personales
+                                </h1>
+                                <p className="text-gray-600 font-montserrat">
+                                    Version 1.0 - Diciembre 2024
+                                </p>
+                            </div>
+
+                            {/* Content */}
+                            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+
+                                <Section title="1. Identificacion del Responsable del Tratamiento" id="responsable">
+                                    <Table
+                                        headers={["Campo", "Informacion"]}
+                                        rows={[
+                                            ["Nombre", "Brallan Mauricio Moreno Guzman"],
+                                            ["Identificacion", "C.C. 1.016.044.186 de Bogota"],
+                                            ["Calidad", "Persona natural actuando bajo el nombre comercial MéTRIK"],
+                                            ["Domicilio", "Bogota D.C., Colombia"],
+                                            ["Correo Electronico", "mauricio.moreno@metrik.com.co"],
+                                            ["Telefono", "+57 315 950 9103"],
+                                            ["Pagina Web", "www.metrik.com.co"]
+                                        ]}
+                                    />
+                                </Section>
+
+                                <Section title="2. Marco Legal" id="marco-legal">
+                                    <p className="text-gray-700 mb-4">Esta Politica se rige por las siguientes normas del ordenamiento juridico colombiano:</p>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Constitucion Politica de Colombia, Articulo 15 (Derecho a la intimidad y Habeas Data)</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Ley Estatutaria 1581 de 2012 - Regimen General de Proteccion de Datos Personales</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Decreto 1377 de 2013 - Reglamentario de la Ley 1581 de 2012</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Ley 1266 de 2008 - Habeas Data Financiero</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Decreto 1074 de 2015 - Decreto Unico Reglamentario del Sector Comercio, Industria y Turismo</span>
+                                        </li>
+                                    </ul>
+                                </Section>
+
+                                <Section title="3. Definiciones" id="definiciones">
+                                    <div className="space-y-4 text-gray-700">
+                                        <p><strong className="text-[#1A1A1A]">Autorizacion:</strong> Consentimiento previo, expreso e informado del Titular para llevar a cabo el Tratamiento de datos personales.</p>
+                                        <p><strong className="text-[#1A1A1A]">Base de Datos:</strong> Conjunto organizado de datos personales que sea objeto de Tratamiento.</p>
+                                        <p><strong className="text-[#1A1A1A]">Dato Personal:</strong> Cualquier informacion vinculada o que pueda asociarse a una o varias personas naturales determinadas o determinables.</p>
+                                        <p><strong className="text-[#1A1A1A]">Dato Sensible:</strong> Datos que afectan la intimidad del Titular o cuyo uso indebido puede generar discriminacion (origen racial, orientacion politica, convicciones religiosas, salud, vida sexual, datos biometricos).</p>
+                                        <p><strong className="text-[#1A1A1A]">Encargado del Tratamiento:</strong> Persona natural o juridica que realiza el Tratamiento de datos personales por cuenta del Responsable del Tratamiento.</p>
+                                        <p><strong className="text-[#1A1A1A]">Responsable del Tratamiento:</strong> Persona natural o juridica que decide sobre la base de datos y/o el Tratamiento de los datos.</p>
+                                        <p><strong className="text-[#1A1A1A]">Titular:</strong> Persona natural cuyos datos personales sean objeto de Tratamiento.</p>
+                                        <p><strong className="text-[#1A1A1A]">Tratamiento:</strong> Cualquier operacion sobre datos personales, como recoleccion, almacenamiento, uso, circulacion o supresion.</p>
+                                    </div>
+                                </Section>
+
+                                <Section title="4. Principios Rectores" id="principios">
+                                    <p className="text-gray-700 mb-4">MéTRIK garantiza el cumplimiento de los siguientes principios:</p>
+                                    <Table
+                                        headers={["Principio", "Descripcion"]}
+                                        rows={[
+                                            ["Legalidad", "El Tratamiento es una actividad reglada que debe sujetarse a lo establecido en la ley."],
+                                            ["Finalidad", "El Tratamiento debe obedecer a una finalidad legitima, la cual debe ser informada al Titular."],
+                                            ["Libertad", "El Tratamiento solo puede ejercerse con el consentimiento previo, expreso e informado del Titular."],
+                                            ["Veracidad", "La informacion sujeta a Tratamiento debe ser veraz, completa, exacta, actualizada y comprobable."],
+                                            ["Transparencia", "Se garantiza el derecho del Titular a obtener informacion sobre sus datos en cualquier momento."],
+                                            ["Acceso y Circulacion Restringida", "El Tratamiento se sujeta a los limites de la naturaleza de los datos y las autorizaciones."],
+                                            ["Seguridad", "Los datos seran manejados con medidas tecnicas, humanas y administrativas de proteccion."],
+                                            ["Confidencialidad", "Todas las personas que intervengan en el Tratamiento estan obligadas a garantizar la reserva de la informacion."]
+                                        ]}
+                                    />
+                                </Section>
+
+                                <Section title="5. Finalidades del Tratamiento" id="finalidades">
+                                    <h3 className="font-montserrat font-semibold text-lg text-[#1A1A1A] mb-3">5.1 Para Clientes y Prospectos Comerciales</h3>
+                                    <ul className="space-y-2 text-gray-700 mb-6">
+                                        <li className="flex items-start gap-2">
+                                            <span className="text-[#10B981] font-bold">a)</span>
+                                            <span>Gestion de la relacion comercial y prestacion de servicios de consultoria en Business Intelligence.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <span className="text-[#10B981] font-bold">b)</span>
+                                            <span>Elaboracion de propuestas comerciales y cotizaciones.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <span className="text-[#10B981] font-bold">c)</span>
+                                            <span>Comunicaciones relacionadas con los servicios contratados.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <span className="text-[#10B981] font-bold">d)</span>
+                                            <span>Envio de informacion comercial, promocional y de nuevos servicios (previo consentimiento).</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <span className="text-[#10B981] font-bold">e)</span>
+                                            <span>Facturacion y gestion de cobro.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <span className="text-[#10B981] font-bold">f)</span>
+                                            <span>Evaluacion de satisfaccion del cliente.</span>
+                                        </li>
+                                    </ul>
+
+                                    <h3 className="font-montserrat font-semibold text-lg text-[#1A1A1A] mb-3">5.2 Para Datos Empresariales de Terceros</h3>
+                                    <p className="text-gray-700 mb-4">En el desarrollo de nuestros servicios de consultoria BI, MéTRIK puede acceder a datos de terceros proporcionados por nuestros clientes. En estos casos, MéTRIK actua como <strong>Encargado del Tratamiento</strong> y:</p>
+                                    <ol className="space-y-2 text-gray-700 list-decimal list-inside">
+                                        <li>Solo procesara los datos para las finalidades especificas del proyecto contratado.</li>
+                                        <li>Mantendra estricta confidencialidad sobre la informacion.</li>
+                                        <li>Implementara medidas de seguridad apropiadas.</li>
+                                        <li>Devolvera o destruira los datos al finalizar el proyecto, segun instrucciones del cliente.</li>
+                                        <li>No utilizara los datos para fines distintos a los acordados contractualmente.</li>
+                                    </ol>
+                                </Section>
+
+                                <Section title="6. Derechos de los Titulares" id="derechos">
+                                    <p className="text-gray-700 mb-4">De conformidad con la Ley 1581 de 2012, los Titulares de datos personales tienen los siguientes derechos:</p>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {[
+                                            { num: "1", title: "Conocer", desc: "Acceder de forma gratuita a sus datos personales." },
+                                            { num: "2", title: "Actualizar", desc: "Solicitar la actualizacion de sus datos personales." },
+                                            { num: "3", title: "Rectificar", desc: "Solicitar la correccion de datos inexactos o incompletos." },
+                                            { num: "4", title: "Suprimir", desc: "Solicitar la eliminacion de sus datos cuando no exista obligacion de conservarlos." },
+                                            { num: "5", title: "Revocar", desc: "Revocar la autorizacion otorgada para el Tratamiento." },
+                                            { num: "6", title: "Oponerse", desc: "Oponerse al Tratamiento de sus datos personales." },
+                                            { num: "7", title: "Solicitar prueba", desc: "Solicitar prueba de la autorizacion otorgada." },
+                                            { num: "8", title: "Presentar quejas", desc: "Presentar quejas ante la SIC por infracciones a la ley." }
+                                        ].map((item, i) => (
+                                            <div key={i} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="w-6 h-6 bg-[#10B981] text-white rounded-full flex items-center justify-center text-xs font-bold">{item.num}</span>
+                                                    <span className="font-montserrat font-semibold text-[#1A1A1A]">{item.title}</span>
+                                                </div>
+                                                <p className="text-sm text-gray-600">{item.desc}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Section>
+
+                                <Section title="7. Procedimiento para Ejercer los Derechos" id="procedimiento">
+                                    <h3 className="font-montserrat font-semibold text-lg text-[#1A1A1A] mb-3">7.1 Canal de Atencion</h3>
+                                    <p className="text-gray-700 mb-4">Los Titulares pueden ejercer sus derechos mediante comunicacion escrita dirigida a:</p>
+                                    <div className="bg-[#10B981]/5 border border-[#10B981]/20 rounded-lg p-6 mb-6">
+                                        <div className="flex flex-col gap-3">
+                                            <a href="mailto:mauricio.moreno@metrik.com.co" className="flex items-center gap-3 text-gray-700 hover:text-[#10B981] transition-colors">
+                                                <Icon name="mail" size={20} className="text-[#10B981]" />
+                                                <span>mauricio.moreno@metrik.com.co</span>
+                                            </a>
+                                            <a href="https://wa.me/573159509103" className="flex items-center gap-3 text-gray-700 hover:text-[#10B981] transition-colors">
+                                                <Icon name="phone" size={20} className="text-[#10B981]" />
+                                                <span>+57 315 950 9103</span>
+                                            </a>
+                                        </div>
+                                        <p className="text-sm text-gray-500 mt-4">Asunto: "Solicitud de Derechos de Datos Personales"</p>
+                                    </div>
+
+                                    <h3 className="font-montserrat font-semibold text-lg text-[#1A1A1A] mb-3">7.2 Requisitos de la Solicitud</h3>
+                                    <ol className="space-y-2 text-gray-700 list-decimal list-inside mb-6">
+                                        <li>Nombre completo y documento de identificacion del Titular.</li>
+                                        <li>Descripcion clara de los hechos que dan lugar a la solicitud.</li>
+                                        <li>Direccion fisica o electronica para notificaciones.</li>
+                                        <li>Documentos que soporten la solicitud, si aplica.</li>
+                                    </ol>
+
+                                    <h3 className="font-montserrat font-semibold text-lg text-[#1A1A1A] mb-3">7.3 Plazos de Respuesta</h3>
+                                    <Table
+                                        headers={["Tipo", "Plazo", "Prorroga"]}
+                                        rows={[
+                                            ["Consultas", "10 dias habiles", "+5 dias habiles"],
+                                            ["Reclamos", "15 dias habiles", "+8 dias habiles"]
+                                        ]}
+                                    />
+                                </Section>
+
+                                <Section title="8. Tratamiento de Datos Sensibles" id="datos-sensibles">
+                                    <p className="text-gray-700 mb-4">MéTRIK <strong>no recolecta ni trata datos sensibles</strong> de forma directa en el ejercicio de sus actividades comerciales.</p>
+                                    <p className="text-gray-700 mb-4">En caso de que en el desarrollo de un proyecto de consultoria el cliente proporcione archivos que contengan datos sensibles de terceros, MéTRIK:</p>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="shield" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Notificara al cliente sobre la presencia de dichos datos.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="shield" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Solicitara instrucciones especificas sobre su tratamiento.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="shield" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Aplicara medidas de seguridad reforzadas.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="shield" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Limitara el acceso unicamente al personal estrictamente necesario.</span>
+                                        </li>
+                                    </ul>
+                                </Section>
+
+                                <Section title="9. Medidas de Seguridad" id="seguridad">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="bg-gray-50 p-6 rounded-lg">
+                                            <h3 className="font-montserrat font-semibold text-lg text-[#1A1A1A] mb-4 flex items-center gap-2">
+                                                <Icon name="server" size={20} className="text-[#10B981]" />
+                                                Medidas Tecnicas
+                                            </h3>
+                                            <ul className="space-y-2 text-gray-700 text-sm">
+                                                <li>Almacenamiento en servicios cloud con certificacion de seguridad.</li>
+                                                <li>Control de acceso mediante autenticacion.</li>
+                                                <li>Respaldos periodicos de informacion.</li>
+                                            </ul>
+                                        </div>
+                                        <div className="bg-gray-50 p-6 rounded-lg">
+                                            <h3 className="font-montserrat font-semibold text-lg text-[#1A1A1A] mb-4 flex items-center gap-2">
+                                                <Icon name="users" size={20} className="text-[#10B981]" />
+                                                Medidas Organizacionales
+                                            </h3>
+                                            <ul className="space-y-2 text-gray-700 text-sm">
+                                                <li>Acuerdos de confidencialidad con colaboradores.</li>
+                                                <li>Protocolo de destruccion/devolucion de datos al finalizar proyectos.</li>
+                                                <li>Limitacion de acceso segun necesidad de conocer.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </Section>
+
+                                <Section title="10. Transferencia y Transmision de Datos" id="transferencia">
+                                    <p className="text-gray-700 mb-4">MéTRIK <strong>no realiza transferencias internacionales</strong> de datos personales a terceros paises.</p>
+                                    <p className="text-gray-700 mb-4">En caso de ser necesaria una transmision a terceros para la prestacion de servicios, se garantizara:</p>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check-circle" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Suscripcion de acuerdos de confidencialidad.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check-circle" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Verificacion de que el tercero cumpla con niveles adecuados de proteccion.</span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <Icon name="check-circle" size={18} className="text-[#10B981] mt-1 shrink-0" />
+                                            <span>Uso exclusivo para las finalidades autorizadas.</span>
+                                        </li>
+                                    </ul>
+                                </Section>
+
+                                <Section title="11. Vigencia" id="vigencia">
+                                    <p className="text-gray-700 mb-4">Esta Politica entra en vigencia a partir de <strong>diciembre de 2024</strong>.</p>
+                                    <p className="text-gray-700 mb-4">Los datos personales seran conservados mientras subsista la finalidad para la cual fueron recolectados y durante el tiempo exigido por las normas aplicables.</p>
+                                    <p className="text-gray-700">MéTRIK se reserva el derecho de modificar esta Politica en cualquier momento. Las modificaciones seran comunicadas a traves de la pagina web www.metrik.com.co.</p>
+                                </Section>
+
+                                <Section title="12. Aceptacion" id="aceptacion">
+                                    <div className="bg-[#1A1A1A] text-white p-6 rounded-lg">
+                                        <p className="mb-4">Al proporcionar sus datos personales a MéTRIK, el Titular acepta los terminos y condiciones establecidos en la presente Politica de Tratamiento de Datos Personales.</p>
+                                        <div className="border-t border-white/20 pt-4 mt-4">
+                                            <p className="font-montserrat font-bold">Brallan Mauricio Moreno Guzman</p>
+                                            <p className="text-gray-400 text-sm">C.C. 1.016.044.186 de Bogota</p>
+                                            <p className="text-gray-400 text-sm">Persona Natural - MéTRIK</p>
+                                            <p className="text-[#10B981] text-sm mt-2">Bogota D.C., Diciembre 2024</p>
+                                        </div>
+                                    </div>
+                                </Section>
+
+                                {/* Back to top */}
+                                <div className="text-center pt-8 border-t border-gray-100">
+                                    <a
+                                        href="/"
+                                        className="inline-flex items-center gap-2 bg-[#10B981] text-white px-6 py-3 rounded-lg font-montserrat font-semibold hover:bg-[#0d9668] transition-colors"
+                                    >
+                                        <Icon name="arrow-left" size={18} />
+                                        Volver al inicio
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-[#1A1A1A] text-white py-12">
+                        <div className="container mx-auto px-6">
+                            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                                <div className="flex items-center gap-4">
+                                    <img
+                                        src="https://i.ibb.co/sdb3Bpq5/M-trik-logo-iso.png"
+                                        alt="MéTRIK Logo"
+                                        className="h-10 w-auto object-contain"
+                                    />
+                                    <span className="font-montserrat font-bold text-lg">MéTRIK</span>
+                                </div>
+                                <div className="flex flex-col md:flex-row gap-6 items-center text-sm text-gray-400">
+                                    <a href="/" className="hover:text-[#10B981] transition-colors">Inicio</a>
+                                    <a href="/confianza" className="hover:text-[#10B981] transition-colors">Seguridad de Datos</a>
+                                    <a href="https://wa.me/573159509103" className="hover:text-[#10B981] transition-colors flex items-center gap-2">
+                                        <Icon name="phone" size={16} />
+                                        +57 315 950 9103
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="text-center mt-8 pt-8 border-t border-white/10 text-xs text-gray-500">
+                                © {new Date().getFullYear()} MéTRIK. Todos los derechos reservados.
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
